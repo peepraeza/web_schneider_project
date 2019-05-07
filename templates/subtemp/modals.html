@@ -1,0 +1,141 @@
+{% include "subtemp/user_modals.html" %}
+
+<div class="modal fade" id="delete-plant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบข้อมูล</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="show-delete">
+                คุณต้องการลบข้อมูล ใช่หรือไม่ ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" id="submit-delete-plant" class="btn btn-success submit-delete">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--popup edit meter channel-->
+<div class="modal fade" id="edit-channel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title md-channel" id="exampleModalLabel">Edit Meter Channel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="meter-form-edit" action="/edit_channel/" method="post">
+                    <div class="row">
+                        <div class="col-3 text-right">
+                            <h5>Description :</h5>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" id="channel_description" name="channel_description" value="" style="width:80%">
+                        </div>
+                    </div>
+                    <input type="hidden" id="m_ch" name="m_ch" value="" >
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="submit-channel"  class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--popup edit ip-->
+<div class="modal fade" id="edit-ip" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Edit Raspberry Pi's IP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="ip-form-edit" action="/edit_ip/" method="post">
+                    <div class="row">
+                        <div class="col-3 text-right">
+                            <h5>IP :</h5>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" id="rp_ip" name="rp_ip" value="" style="width:70%">
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="submit-ip"  class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--popup edit bill-->
+<div class="modal fade" id="edit-bill" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Edit Cut-Off Date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bill-form-edit" action="/edit_bill/" method="post">
+                    <div class="row">
+                        <div class="col-3 text-right">
+                            <h5>Date:</h5>
+                        </div>
+                        <div class="col-2">
+                            <select id="bill">
+                                {% for i in range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <h5>Live at :</h5>
+                            
+                        </div>
+                        <div  class="col-2">
+                            <input type="radio" id ='liveat' name="liveat" value="Home"> Home
+                        </div>
+                        <div  class="col-2">
+                                <input type="radio" id='liveat' name="liveat" value="Dorm" class="enable_tb"> Dorm
+                            </div>
+                        </br>
+                        </br>
+                        <div class="col-3  text-right">
+                            <h5>Price :</h5>
+                        </div>
+                        <div  class="col-6">
+                            <input class="form-control" id="unit" name="unit" value="" disabled="disabled">
+                        </div>
+                        <div class="col-3">
+                           <h5>Baht/Unit</h5>
+                        </div>
+                    </div>
+                    <input type="hidden" id="cbill" name="cbill" value="">
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="submit-bill"  class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

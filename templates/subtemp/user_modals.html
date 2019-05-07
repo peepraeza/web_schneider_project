@@ -1,0 +1,116 @@
+<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ยืนยันการออกจากระบบ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                คุณต้องการออกจากระบบ ใช่หรือไม่ ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <!-- <form action="/accounts/logout/" method="POST"> -->
+                <a href="{% url 'logout' %}">
+                    <input type="submit" id="submit-logout" class="btn btn-success" value="ตกลง">
+                    {% csrf_token %}
+                </a>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="change-email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">เปลี่ยนอีเมลล์</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="email-change" action="/plant/compost/" method="post">
+                    <div class="row">
+                        <div class="col-4 text-right">
+                            <h5>รหัสผ่าน:</h5>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" name="val-pass-email" id="val-pass-email" type="password" required>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="col-4 text-right">
+                            <h5>อีเมลล์ใหม่:</h5>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" name="email-new" id="email-new" type="email" required>
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" id="submit-email"  class="btn btn-success">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">เปลี่ยนรหัสผ่าน</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="pass-change" action="/user/change_password" method="post">
+                    <div class="row">
+                        <div class="col-4 text-right">
+                            <h5>รหัสผ่านเก่า:</h5>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" name="pass-old" id="pass-old" type="password" required>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="col-4 text-right">
+                            <h5>รหัสผ่านใหม่:</h5>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" name="pass-new" id="pass-new" type="password" required>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="col-4 text-right">
+                            <h5>ยืนยันรหัสผ่านใหม่:</h5>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" name="pass-new-val" id="pass-new-val" type="password" required>
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" id="submit-pass"  class="btn btn-success">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div> 
+{% if is_warning %}
+<script>
+    alert("{{ warning_messsage }}")
+</script>
+{% endif %}

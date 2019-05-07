@@ -1,0 +1,42 @@
+<script>
+    $("#submit-pass").click(function(){
+        old_pass = $("#pass-old").val()
+        new_pass = $("#pass-new").val()
+        val_pass = $("#pass-new-val").val()
+        if(new_pass != val_pass){
+            alert("รหัสผ่านและตรวจสอบรหัสผ่านไม่ตรงกัน")
+        }else{
+            $.post( "/user/change_password/", {
+                "old-pass": old_pass, 
+                "new-pass": new_pass, 
+                "csrfmiddlewaretoken": $("[name=csrfmiddlewaretoken]").val(),
+            }, function( data ) {
+                data = JSON.parse(data)
+                if(data["status"]){
+                    alert("เปลี่ยนรหัสผ่านสำเร็จ")
+                }else{
+                    alert("เปลี่ยนรหัสผ่านผิดพลาด ตรวจสอบรหัสผ่านเดิมให้ถูกต้อง")
+                }
+                $("#change-password").modal("hide")
+            });
+        }
+    })
+    
+    $("#submit-email").click(function(){
+        pass = $("#val-pass-email").val()
+        email = $("#email-new").val()
+        $.post( "/user/change_email/", {
+            "pass": pass, 
+            "email": email, 
+            "csrfmiddlewaretoken": $("[name=csrfmiddlewaretoken]").val(),
+        }, function( data ) {
+            data = JSON.parse(data)
+            if(data["status"]){
+                alert("เปลี่ยนอีเมลสำเร็จ")
+            }else{
+                alert("เปลี่ยนอีเมลผิดพลาด ตรวจสอบรหัสผ่านให้ถูกต้อง")
+            }
+            $("#change-email").modal("hide")
+        });
+    })
+</script>

@@ -1,0 +1,265 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/logoja-icon.png' %}">
+    <title>Home Energix</title>
+    <!-- Custom CSS -->
+    <!--<link href="{% static 'assets/libs/flot/css/float-chart.css' %}" rel="stylesheet">-->
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/button.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    
+    <link href="{% static 'css/datepicker/bootstrap-datepicker.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>-->
+    
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {% include "subtemp/heads.html" %}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+             <div class="page-breadcrumb">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="page-title">Power Estimation</h4>  
+                    </div>
+                </div>  
+                          
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Real-time Estimation</span></a></li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab2" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Select-time Estimation</span></a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="tab1" role="tabpanel">
+                                	<div class="row" style="padding-top:20px; margin:0">
+					                    <div class="col-12">
+					                        <div class="row">
+					                            <div class="col-3">
+					                                <div class="card card-hover">
+					                                    <div class="box bg-warning text-center">
+					                                        <h5>{{ meter.0.description }}</h5>
+					                                        <h2 id="ppm1">0</h2>
+					                                        <h6>kWh</h6>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                            <div class="col-3">
+					                                <div class="card card-hover">
+					                                    <div class="box bg-dark text-center">
+					                                        <h5 class="text-white">Predict {{ meter.1.description }}</h5>
+					                                        <h2 id="ppm2" class="font-light text-white">0</h2>
+					                                        <h6 class="text-white">kWh</h6>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                            <div class="col-3">
+					                                <div class="card card-hover">
+					                                    <div class="box bg-dark text-center">
+					                                        <h5 class="text-white">Predict {{ meter.2.description }}</h5>
+					                                        <h2 id="ppm3" class="font-light text-white">0</h2>
+					                                        <h6 class="text-white">kWh</h6>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                            <div class="col-3">
+					                                <div class="card card-hover">
+					                                    <div class="box bg-dark text-center">
+					                                        <h5 class="text-white">Predict {{ meter.3.description }}</h5>
+					                                        <h2 id="ppm4" class="font-light text-white">0</h2>
+					                                        <h6 class="text-white">kWh</h6>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="actual_main" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="predict_ap1" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="predict_ap2" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="predict_ap3" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" id="tab2" role="tabpanel">
+                                	<div class="float-right" style="padding:20px">
+					                    <input type="text" id="datepickerka2" name="datefilter" value="Select Date" style="width:180px" />
+					                    <button type="button" id="button">Submit!</button> 
+					                </div>
+                                    <div class="row" style="width:100%; margin:0">
+                                        <div class="col-12">
+                                            <div class="card">
+					                            <div id="main_select" style="height: 380px; min-width: 310px"></div>
+					                        </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+					                            <div id="ap1_predict_select" style="height: 380px; min-width: 310px"></div>
+					                        </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+					                            <div id="ap2_predict_select" style="height: 380px; min-width: 310px"></div>
+					                        </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+					                            <div id="ap3_predict_select" style="height: 380px; min-width: 310px"></div>
+					                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    
+    {% include "subtemp/user_modals.html" %}
+    
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
+    <script src="{% static 'assets/extra-libs/sparkline/sparkline.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script>
+        $(document).ready(function () {
+            document.getElementById("tab2").classList.remove('active');
+            
+        });
+        var e = JSON.parse('{{ energy | escapejs }}');
+        var pred = JSON.parse('{{ pred | escapejs }}');
+        var ch1_name = "{{ meter.0.description }}";
+        var ch2_name = "{{ meter.1.description }}";
+        var ch3_name = "{{ meter.2.description }}";
+        var ch4_name = "{{ meter.3.description }}";
+        var now_p = JSON.parse('{{ now_p | escapejs }}');
+        var firstdate =  "{{ firstdate }}";
+        var lastdate = "{{ lastdate }}";
+        var col = JSON.parse('{{ d_col | escapejs }}');
+        var p1_wh = JSON.parse('{{ p1_val | escapejs }}');
+        var p2_wh = JSON.parse('{{ p2_val | escapejs }}');
+        var p3_wh = JSON.parse('{{ p3_val | escapejs }}');
+        var p4_wh = JSON.parse('{{ p4_val | escapejs }}');
+        var data_last7 = JSON.parse('{{ data | escapejs }}');
+        var data_last7_pre = JSON.parse('{{ data_pre | escapejs }}');
+    </script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBlkrkJS2aKF8HSGtgS0sR5aw-MiVZUSGM",
+            authDomain: "data-log-fb39d.firebaseapp.com",
+            databaseURL: "https://data-log-fb39d.firebaseio.com",
+            projectId: "data-log-fb39d",
+            storageBucket: "data-log-fb39d.appspot.com",
+            messagingSenderId: "946043644125"
+        };
+        
+        firebase.initializeApp(config);
+        var database = firebase.database(); 
+    </script>
+    <script src="{% static 'js/predictchart.js' %}"></script>
+    <script src="{% static 'js/predictchart2.js' %}"></script>
+</body>
+
+</html>
+
+{% include "subtemp/extra_js.html" %}

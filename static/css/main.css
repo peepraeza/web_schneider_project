@@ -1,0 +1,154 @@
+html, body{
+    background: #eeeeee;
+}
+
+.footbar, .mobileindex, .page-title2, .plant, #search_plant {
+    display: none;
+}
+.comment-widgets .comment-row{
+    margin:0;
+}
+#search-dropdown-plant {
+    padding: 10px;
+    margin-top: -6px;
+    border: 0;
+    border-radius: 0;
+    background: #f1f1f1;
+}
+.plant-card {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.delete-bar {
+    height: 0px;
+    margin-top: 10px;
+    padding: 0px;
+    overflow: hidden;
+    transition: height 0.3s;
+    background: #FF5666;
+    border: none;
+}
+#search_plant2 {
+    width: 70%;
+    height: 30px;
+    font-size: 14px;
+    padding: 12px 20px 12px 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 0;
+    margin-left:12px;
+}
+.led-box {
+  height: 30px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.led-green {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: #0F0;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #0A0 0 2px 12px;
+}
+@media (max-width: 767px){
+    .tooltip{
+        display:none;
+    }
+    #search_plant {
+        display:inline;
+        width: 70%;
+        height: 30px;
+        font-size: 14px;
+        padding: 12px 20px 12px 20px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        margin-left:12px;
+    }
+    
+    .plant-card{
+        max-height: none;
+        overflow-y: none;
+    }
+    .mobileindex{
+        display: block;
+        background: #eeeeee;
+        border-color: #eeeeee;
+    }
+    .footbar{
+        display:inline;
+        width:100%;
+        position:fixed;
+        bottom: 0px;
+        height: 55px;
+        background: #1F262D;
+    }
+    .valvcontrol, .page-title1, .showseed, .bar-mobile, .show-meter{
+        display: none;
+    }
+    .topbar{
+        height:55px;
+    }
+    .topbar .top-navbar{
+        min-height: 55px;
+    }
+    .navbar-header{
+        position: fixed;
+        height: 55px;
+    }
+    .boxs{
+        padding:7px;
+    }
+    .boxs h4, .boxs h6{
+        margin-bottom:1.5px;
+        color:#fff;
+    }
+    
+    .boxs h6{
+        font-size: 12px;
+    }
+    .boxs h4 {
+        font-size: 22px;
+    }
+    .tabbable-line > .nav-tabs > li.active {
+      border-bottom: 4px solid #f3565d;
+      position: relative;
+    }
+    .now h4, .now h6{
+        color: #87CEFA;
+    }
+    .page-title2, .plant {
+        display: inline;
+    }
+    
+    .delete-bar {
+        display: block;
+        position: fixed;
+        height: 100px;
+        top: 101%;
+        background: #FF5666;
+        color: #FFFFFF;
+        line-height: 50px;
+        transition: top 0.5s;
+        text-align: center;
+        width: 100%;
+        font-size: 16px;
+    }
+    
+    .plant-dropdown-items {
+        max-height: 200px;
+        overflow-y: scroll;
+        /*width: calc(100% - );*/
+        /*webkit-transform: translate3d(-20px, 0px, 0px);*/
+    }
+    
+  .card-hover {
+    webkit-transform: translateY(-4px) scale(1.01);
+    -moz-transform: translateY(-4px) scale(1.01);
+    -ms-transform: translateY(-4px) scale(1.01);
+    -o-transform: translateY(-4px) scale(1.01);
+    -webkit-transform: translateY(-4px) scale(1.01);
+    transform: translateY(-4px) scale(1.01);
+    -webkit-box-shadow: 0 14px 24px rgba(62, 57, 107, 0.1);
+    box-shadow: 0 14px 24px rgba(62, 57, 107, 0.1); }
+}

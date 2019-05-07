@@ -1,0 +1,341 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/logoja-icon.png' %}">
+    <title>Home Energix</title>
+    
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/button.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    
+    <link href="{% static 'css/datepicker/bootstrap-datepicker.css' %}" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {% include "subtemp/heads.html" %}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-6 d-flex no-block align-items-center">
+                        <h4 class="page-title1" style="margin-bottom: 0.0rem;">Real-Time Load Sharing</h4>
+                        <h4 class="page-title2">test</h4>
+                    </div>
+                    <!-- <div class="col-6 "style="text-align:right">
+                        <h4 class="page-title1" style="margin: 0 10px 0 0" >Monthly</h4>
+                        <small class="font-light" style="margin: 0 10px 0 0">Cut-Off Date : {{ dbill }} </small>
+                    </div> -->
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid" style="padding-top:10px">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <h5 class="text-white">{{ meter.0.description }}</h5>
+                                        <h2 id="ppm1" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <h5 class="text-white">{{ meter.1.description }}</h5>
+                                        <h2 id="ppm2" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <h5 class="text-white">{{ meter.2.description }}</h5>
+                                        <h2 id="ppm3" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <h5 class="text-white">{{ meter.3.description }}</h5>
+                                        <h2 id="ppm4" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h5>Charge Util Now</h5>
+                                <h2 id="cost_main">0</h2>
+                                <h6>Baht</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="card">
+                        <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">All</span></a></li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab2" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Active Power(P)</span></a></li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tab3" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">Current(I)</span></a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="tab1" role="tabpanel">
+                                    <div class="box bg-white text-center">
+                                        <h1 class="font-light text-white">
+                                            <div id="all" style="height: 500px; min-width: 310px"></div>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" id="tab2" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="activePow1" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="activePow2" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="activePow3" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="activePow4" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" id="tab3" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="current1" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="current2" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="current3" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="box bg-white text-center">
+                                                <h1 class="font-light text-white">
+                                                    <div id="current4" style="height: 280px;"></div>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="p-10 text-center">
+                                    <h5 class="m-b-0">Daily</h5>
+                                    <small class="font-light">(kWh/Day)</small>
+                                    <h5 id="daynow" class="m-b-0">12</h5>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="bg-dark p-10 text-white text-center">
+                                    <h4 class="m-b-0 m-t-5">{{ meter.0.description }}</h4>
+                                    <h5 id="pv1" class="m-b-0 m-t-5">2540</h5>
+                                    <small class="font-light">(kWh)</small>
+                                </div>
+                            </div>
+                            <div class="col-12 m-t-15">
+                                <div class="bg-dark p-10 text-white text-center">
+                                    <h4 class="m-b-0 m-t-5">{{ meter.1.description }}</h4>
+                                    <h5 id="pv2" class="m-b-0 m-t-5">2540</h5>
+                                    <small class="font-light">(kWh)</small>
+                                </div>
+                            </div>
+                            <div class="col-12 m-t-15">
+                                <div class="bg-dark p-10 text-white text-center">
+                                    <h4 class="m-b-0 m-t-5">{{ meter.2.description }}</h4>
+                                    <h5 id="pv3" class="m-b-0 m-t-5">2540</h5>
+                                    <small class="font-light">(kWh)</small>
+                                </div>
+                            </div>
+                            <div class="col-12 m-t-15">
+                                <div class="bg-dark p-10 text-white text-center">
+                                    <h4 class="m-b-0 m-t-5">{{ meter.3.description }}</h4>
+                                    <h5 id="pv4" class="m-b-0 m-t-5">2540</h5>
+                                    <small class="font-light">(kWh)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    
+    {% include "subtemp/user_modals.html" %}
+    
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
+    <script src="{% static 'assets/extra-libs/sparkline/sparkline.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <!-- datepicker -->
+    <script src="{% static 'js/datepicker/bootstrap-datepicker-custom.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.th.min.js' %}" charset="UTF-8"></script>
+    <!-- firebase highchart --->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    
+    <script>
+    var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    $('#daynow').html(day+'/'+month+'/'+year);
+    var bill_cost = "{{ bill_cost }}";
+    var bill_cost_date = "{{ bill_cost_date }}";
+    var check=false;
+    var e = JSON.parse('{{ energy | escapejs }}');
+    var daily_p = JSON.parse('{{ daily_p | escapejs }}');
+    var now_p = JSON.parse('{{ now_p | escapejs }}');
+    var ch1_name = "{{ meter.0.description }}";
+    var ch2_name = "{{ meter.1.description }}";
+    var ch3_name = "{{ meter.2.description }}";
+    var ch4_name = "{{ meter.3.description }}";
+    var unit = "{{ unit }}";
+    $(document).ready(function() {
+        var interval = setInterval(function() {
+            var currentDate = new Date();
+            if(currentDate.getDate() != day){
+                day = currentDate.getDate();
+                month = currentDate.getMonth() + 1;
+                year = currentDate.getFullYear();
+                $('#daynow').html(day+'/'+month+'/'+year);
+                check = true;
+            }
+        }, 100);
+        document.getElementById("tab2").classList.remove('active');
+        document.getElementById("tab3").classList.remove('active');
+        document.getElementById("tab4").classList.remove('active');
+        document.getElementById("tab5").classList.remove('active');
+    });
+    </script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBlkrkJS2aKF8HSGtgS0sR5aw-MiVZUSGM",
+            authDomain: "data-log-fb39d.firebaseapp.com",
+            databaseURL: "https://data-log-fb39d.firebaseio.com",
+            projectId: "data-log-fb39d",
+            storageBucket: "data-log-fb39d.appspot.com",
+            messagingSenderId: "946043644125"
+        };
+        
+        firebase.initializeApp(config);
+        var database = firebase.database(); 
+    </script>
+    <script src="{% static 'js/highchart.js' %}"></script>
+</body>
+
+</html>
+
+{% include "subtemp/extra_js.html" %}
+<script type="text/javascript" src="">
+    setSidebarActive(0)
+</script>
