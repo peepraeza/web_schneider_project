@@ -110,7 +110,7 @@
                             </div>
                             
                             <div class="col-6">
-                                <div class="card">
+                                <!-- <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title m-b-0">Setting Raspberry Pi's IP</h5>
                                     </div>
@@ -121,7 +121,7 @@
                                             <th scope="col" style="width:10%"><a id="{{ ip_now }}" class="rpi-ip" href="#">Edit</a></th>
                                         </tr>
                                     </table>
-                                </div>
+                                </div> -->
                                 
                                 <div class="card">
                                     <div class="card-body">
@@ -163,49 +163,6 @@
             <!-- ============================================================== -->
             
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-        <div style="height: 50px" class="mobileindex"></div>
-        <footer class="footbar">
-            <div class="row">
-                <div class="col-3">
-                    <a href="/index/">
-                        <div class="boxs text-center">
-                            <h4><i class="fas fa-seedling"></i></h4>
-                            <h6>Index</h6>
-                        </div>
-                    </a>
-                </div>
-                 <!-- Column -->
-                <div class="col-3">
-                    <a href="/control/">
-                        <div class="boxs text-center">
-                            <h4><i class="fas fa-thermometer-half"></i></h4>
-                            <h6>None</h6>
-                        </div>
-                    </a>
-                </div>
-                <!-- Column -->
-                <div class="col-3">
-                    <!--<a href="history">-->
-                        <div class="boxs text-center now">
-                            <h4><i class="fas fa-history"></i></h4>
-                            <h6>History</h6>
-                        </div>
-                    <!--</a>-->
-                </div>
-                 <!-- Column -->
-                <div class="col-3">
-                    <a href="/graph/">
-                        <div class="boxs text-center">
-                            <h4><i class="fas fa-chart-bar"></i></h4>
-                            <h6>Graph</h6>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </footer>
     </div>    
     {% include "subtemp/user_modals.html" %}
     {% include "subtemp/modals.html" %}
@@ -249,14 +206,14 @@
                $("#meter-form-edit").submit(); 
             });
             
-            $(".rpi-ip").click(function(){
-                var ip = $(this).attr("id");
-                $("#rp_ip").val(ip);
-                $('#edit-ip').modal('show');
-            })
-            $("#submit-ip").click(function(){
-               $("#ip-form-edit").submit(); 
-            });
+            // $(".rpi-ip").click(function(){
+            //     var ip = $(this).attr("id");
+            //     $("#rp_ip").val(ip);
+            //     $('#edit-ip').modal('show');
+            // })
+            // $("#submit-ip").click(function(){
+            //    $("#ip-form-edit").submit(); 
+            // });
             var bill = $("#dbill").text();
             var live = $("#live").text();
             if(live == "Home"){

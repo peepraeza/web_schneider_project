@@ -29,11 +29,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle:before {
-  content: "ปิด";
+  content: "off";
   left: -4rem;
 }
 .btn-toggle:after {
-  content: "เปิด";
+  content: "on";
   right: -4rem;
   opacity: 0.5;
 }
@@ -121,11 +121,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle.btn-lg:before {
-  content: "ปิด";
+  content: "off";
   left: -5rem;
 }
 .btn-toggle.btn-lg:after {
-  content: "เปิด";
+  content: "on";
   right: -5rem;
   opacity: 0.5;
 }
@@ -206,11 +206,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle.btn-sm:before {
-  content: "ปิด";
+  content: "off";
   left: -0.5rem;
 }
 .btn-toggle.btn-sm:after {
-  content: "เปิด";
+  content: "on";
   right: -0.5rem;
   opacity: 0.5;
 }
@@ -291,11 +291,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle.btn-xs:before {
-  content: "ปิด";
+  content: "off";
   left: 0;
 }
 .btn-toggle.btn-xs:after {
-  content: "เปิด";
+  content: "on";
   right: 0;
   opacity: 0.5;
 }
