@@ -44,20 +44,20 @@ watt_data = deque([])
 backup = False
 key = {
     "type": "service_account",
-    "project_id": "data-log-fb39d",
-    "private_key_id": "80fcc158210ed58b29588b3a67d52c170c60d0d4",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDnosoCGh4cByPb\nmXVsjoBR+jOhgh58Z8qrU6Z33MhIQ045fHsscz1ncI7HsgNC5jQ7dQ6ZY0IB9sMq\n0Z3JUo3KMS9lpsd/MAs8oq+zmU39QsGTm+Ha7kiTQuI4PjkOfUB9oyVcdyP6TXUk\nrAzrIAwJfnar5NKmFcpK6EsNzsumx2QVQaC/zK8VAQou8KBmEDc6VsHhUWFh6j9p\nSN0iCw8hWXjVRI/r1ReUs9kR+30QDSXnNIO77a8XFmZyC2maEnqPY6vSeRP1cTWa\nHHackO8TxnhR4siLwZ7o4LVe25ocLIbzC6PnzCDXgG7Vk/Yc2UsGdogcjgbGvjP9\n6yq5iWEvAgMBAAECggEARLStdIgorCmWAjn3cXanKymqjNpajo3+uGi8dMshAQYt\nurFom5um9/qT7zmm6/36OjSTWv3tA0YdR6MbSS7abcG/DEi23cvzWU3sDbqIPnnB\njzXqfRS2pC9viD00kU6nhVyR5WZVXpYBDBqYTlmYGGzRaFUcAjVuZl+We4b+Mv5b\nA/eWRx9AoJEy0Vr4HexEeJI+mJCOag+Ab1Kk4YkOpTLgDhnHHLfzn5n+H4Da8VaS\n5//4uFCDF5TIwHz4L3qZCWudDlVq6UF4390IpQTMMdyDgQJfeiesvQdcPKzae9EV\nYBo/QftB/kbZ66RukVAgIVEOf3vJtZplcfm+8MJokQKBgQD08/cnT2pze5hk7NnL\n09aSTYs/v7YKTQVgy5dCmQ5s/9KtS0KNnH2wbM/gIvmDSdsSoLVsSylybgShxF/f\n8yqprmtdPxw8jIkHUnyZIKBQAKYTXTfZF5QUgJ3E8qGxJ3xBUWGr4ZvdiXkDW4B4\n9O1VGhBMvy9DIN9GliF8yilnqQKBgQDyFRMvnXtgYj6T0IhAj8wEVuQy4V1MpLEb\neV8bmyX03vYm9h4fdd/OntrSwx1IfDP+q76SX4L2y6dlBoO3vS2HJ/9EbDeK35/C\nscwiToaoVljVZwGOqjkeMr1fH9DvQVBX8pupgVQtG3lERzl0GUgJBsMUID9JbkSp\nDSPq0t8pFwKBgGTJ9YoxPSXjVyM/6aXatlFgoslKQsceRfY8DzMR80OaR7+SVgIa\nwATV4PriqTQCMagKhFvY2WcCKdm+CY0GaymCYR7vFtk7Ii7nG+mN6SjB+5PAKXik\nIQQGn+QnyawxCQl/SOcGX7HaHPbqsYQTk4wOu2I40GOYpQZQQ9sq+7pxAoGBAIWk\nhNcAhaAMHKfVs6KQv/yVS52bNLqfIPcd5heDa0zn2dRggvizRj73C67W8E+X4cxy\nW97Kw64jd+IZ2pWQ5pV6yz2m0HLmSXheV2eJGmXMZXZKS13LM4UsVccx9VJgKE6l\nLLJDJ4lPZX8AIwOpAU+aYA+4TbfoHBeHnZCBoZk5AoGBANjr5irUefz0Q9N1qUWi\nfX9phEKXRxPt9RQlx3TQuUh64kfoaIOlOZrT70GlFjPwgi2OSDzY7LFsSw1YNU3E\n++GeVXcxcjEAAUrxbfBS89sN8Qv3GSe/Kl3TH9MJ0cEfmbmH/UOw9ktqpPDJBHBF\n8PGSHAkwT18oMazDVlTJqlNc\n-----END PRIVATE KEY-----\n",
-    "client_email": "firebase-adminsdk-qthge@data-log-fb39d.iam.gserviceaccount.com",
-    "client_id": "111119234437985151574",
+    "project_id": "schneider-project",
+    "private_key_id": "3c37cf3486af56386e64275d9fbad77f3774c08f",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDHwMvAxN6pzrdP\nmOb2MUQ1+M6+CctwJGe+CPadw2cVfcGuKfUH4etYDSCtbKJYU9e+xDBMGXdWZ0fd\nBfWMEzLaOgzxBEpvqkn+AQ0gq5D0KroCUALLRfIhDxwoY6kK1GJmH8O1OFMGyOzm\n4cTfylTFovsaHpLP5FDge4LLZ+8MlFrfKyobra94hZPbcG8mGaRhrgvxwVwZDhHb\nmrJfTUuP48y/wi8w+Q2YVf7+40RMw3qyAf9oJurid//zu/2IxEuIp3H4hARb4Rw7\n8/6rpRLnYajjOrarkLj8AToE7ZdKFvGsbFG36vaxivf7uTaTvfmjwzFSPjTTW7To\nn6r6R6SbAgMBAAECggEAL+9dNepIgLlhlhFcQ3I5KzaE7mfNUSD7YEgoXl2Y7Dhc\ndR4OdhDJ+DxWPifWoZmlKVtNN8XYtHxea3TVowKsbmAF4QSllDxqOzEnZFKnm2Bx\neMKYmQ00+Kf2mt6nnziuUFGJFoDos7Ud3J4LL6UPSMo+tdrmYkso+WXKUmOjowG9\n11rDYi9wY/nLp5pRpIHYoZbJBI4knpV9y97Scze9jD/31aOLUmoKDC+pS2BfWsad\n67GGXgMpFCCFVoOu3lbosVD8jLEfqvT4lR9KSTkAVdoKysR1BFw/LlawCMf2W30T\n0mNYHJGWHxfG8pcdyzLpcpTUTE9pRCzr56kPXwYG+QKBgQD7JFNiXPfyf8luItOJ\nNPz+EuL+EXgVOHoP3LF/TmWtW87gJ1i6NNHg6J4kpuyw45ysBFbZlaMY4lJbjy2n\nZuExSJOR2fj1wEKWJhLAP9WgBgvT34Dd0sbcM80tfMi10vIRo9Es2NPLAR4lV8J1\npbU/CPAiMSZGJa0qEieonK8tZwKBgQDLnf0ogCx5kzUpfbhvp4Ml943S4Ur3hxj9\noJ7FvnzKfs3vg/X/5l4Wj7A1+GsUeXqHWCNXccSKBAcUzmjoXwepbPXpC3Roq9qg\n8TVLoVwDo/p0ZJtlGUr8I8SKVbc3ILfsVP6ociHamUN13h+KFcGurnNt6YrT19q4\nA+qzoPqarQKBgQDd0abooU7K3H1wjsgiTzAJxWrCl3Fl5N1C9127IOaDqSxfJcGj\nrhWWPj+4BcvXLSLreGWxhw5oYzX08tCTJDZQzlaxI0JW5Tqq3fP/5CHuVojJ2YY7\n5viH9CUMQUQR/MCcPgH6R4VBr7oNp6b1PKiKhX175cd1e7+oAiMPNV0wjwKBgER5\nGcQ/7jToKy2LyLVLmM/wwvHSr5o0BVRtaldHasHSCMDuGJD40FU39uL/aksVWv4e\nxqvGZ3ieSB9YFnFmW7Y/HSdEod39ROVwmCKZ3c6fmz7/Aj7qVYwbHyICFz3js9Y2\n8viEgRv5BHWjv+l4zYxHwCuLKRN6eGP/dTL5BK11AoGAVMtobnwh9FBTBltoZxru\n53CpFh/2VGfpJsD9N/QiKtBqsgWEthjTZeDYtxARRMO7QZkHILExEmPdm+xyJbjL\nsi18LxoBDtJSBDjodmcgYnpamnTCmfSvpA90z917uFQ9xQZ7bcI8J1dTuL1CtKUX\nhDdkDGbVa3Rm9K/c2J4BtY0=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-ygdjt@schneider-project.iam.gserviceaccount.com",
+    "client_id": "103751846783469949126",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://oauth2.googleapis.com/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-qthge%40data-log-fb39d.iam.gserviceaccount.com"
-}
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ygdjt%40schneider-project.iam.gserviceaccount.com"
+    }
 
 cred = credentials.Certificate(key)
 firebase_admin.initialize_app(cred, {
-    'databaseURL' : 'https://data-log-fb39d.firebaseio.com/'
+    'databaseURL' : 'https://schneider-project.firebaseio.com/'
 })
 module_dir = os.path.dirname(__file__)
 model_path = os.path.join(module_dir, '../../static/json/model.pkl')
@@ -601,7 +601,7 @@ def set_data():
                 p4_pre_wh['day'][new_day] = sum(y_pd['ap3'].values())
                 
     ref = db.reference('energy')
-    result = ref.order_by_child('time').limit_to_last(500).get() # 30 mins
+    result = ref.order_by_child('time').limit_to_last(1000).get() # 30 mins
     value_array = list(result.values())
     # print(value_array)
     watt_data = deque(value_array)
