@@ -716,6 +716,24 @@ def get_data_last_7days():
     y_pd = convert_values(predictions1, lp).to_dict()
     return [data, y_pd]
 
+def set_time(request):
+    if request.method == "GET" and request.is_ajax():
+        mins = int(request.GET.get('minutes'))
+        appliance_id = int(request.GET.get('appliance_id'))
+        status = int(request.GET.get('status'))
+        print(mins, appliance_id, status)
+        t2=threading.Timer(mins*60, control_plc, args=(appliance_id, status, )).start()
+        t = datetime.now() + timedelta(minutes=mins)
+        unixtime_delay = int(t.timestamp())
+        data = {"time" : unixtime_delay}
+        return JsonResponse(data)
+
+def control_plc(appliance_id, status):
+    ref = db.reference('connect_plc')
+    appliance = "appliance"+str(appliance_id)
+    print(appliance)
+    ref.update({appliance : status})
+
 def get_date_return_json(request):
     global backup
     if request.method == "GET" and request.is_ajax():

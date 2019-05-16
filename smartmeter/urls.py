@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^ajax/get_current_energy/$', views.get_current_energy),
     url(r'^ajax/get_current_predict/$', views.get_current_predict),
     url(r'^ajax/get_date_return_json/$', views.get_date_return_json),
+    url(r'^ajax/set_time/$', views.set_time),
 
     # setting views
     url(r'^edit_channel/', setting_views.edit_channel),
