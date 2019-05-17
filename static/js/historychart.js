@@ -25,17 +25,19 @@ var i3 = [];
 var i4 = [];
 for(var i=0;i< data_last7.time[0].length ;i++){
     var time = parseInt(data_last7.time[0][i])*1000; 
-    p1.push([time, parseInt(data_last7.p1[0][i])]);
-    p2.push([time, parseInt(data_last7.p2[0][i])]);
-    p3.push([time, parseInt(data_last7.p3[0][i])]);
-    p4.push([time, parseInt(data_last7.p4[0][i])]);
+    p1.push([time, (data_last7.p1[0][i])]);
+    p2.push([time, (data_last7.p2[0][i])]);
+    p3.push([time, (data_last7.p3[0][i])]);
+    p4.push([time, (data_last7.p4[0][i])]);
 
-    i1.push([time, parseInt(data_last7.i1[0][i])]);
-    i2.push([time, parseInt(data_last7.i2[0][i])]);
-    i3.push([time, parseInt(data_last7.i3[0][i])]);
-    i4.push([time, parseInt(data_last7.i4[0][i])]);
+    i1.push([time, (data_last7.i1[0][i])]);
+    i2.push([time, (data_last7.i2[0][i])]);
+    i3.push([time, (data_last7.i3[0][i])]);
+    i4.push([time, (data_last7.i4[0][i])]);
+    console.log(i1);
 }
-console.log(lastdate)
+
+// console.log(lastdate)
 var chart_year = Highcharts.chart('container_kwh', {
     chart: {
         type: 'column'
@@ -158,8 +160,8 @@ Highcharts.stockChart('all', {
         },
         top: '55%',
         height: '45%',
-        offset: 0,
-        lineWidth: 2
+        // offset: 0,
+        // lineWidth: 2
     }],
 
     credits: {
@@ -178,7 +180,7 @@ Highcharts.stockChart('all', {
         enabled: false
     },
     tooltip: {
-        valueDecimals: 2,
+        valueDecimals: 1,
     },
 
     series: [{

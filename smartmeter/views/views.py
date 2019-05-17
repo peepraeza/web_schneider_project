@@ -34,8 +34,7 @@ from sklearn.externals import joblib
 from skmultilearn.problem_transform import LabelPowerset
 
 urllib3.disable_warnings()
-pee_ja = 20
-time_data, p1, p2, p3, p4, q1, q2, q3, q4, s1, s2, s3, s4, i1, i2, i3, i4, pf1 = ([] for i in range(18))
+time_data, p1, p2, p3, p4, q1, q2, q3, q4, s1, s2, s3, s4, i1, i2, i3, i4 = ([] for i in range(17))
 p1_wh, p2_wh, p3_wh, p4_wh = ({'day':{},'month':{}, 'year':{}} for i in range(4))
 p2_pre_wh, p3_pre_wh, p4_pre_wh = ({'day':{}} for i in range(3))
 cur_d1m, cur_d1hr, cur_d30m = (pd.DataFrame() for i in range(3))
@@ -84,8 +83,8 @@ def index(request):
     now_p3 = watt_data[-1]["P3"]
     now_p4 = watt_data[-1]["P4"]
     now_p = [now_p1, now_p2, now_p3, now_p4]
-    bill_cost, bill_date =  get_cur_wh()
-    data_cur = (bill_cost+cur_wh[0])/1000
+    monthly_wh =  get_wh_monthly()
+    data_cur = (monthly_wh+cur_wh[0])/1000
     cost = calculate_cost_energy(data_cur)
     return render(request, "index.html", {"energy": json.dumps(list(watt_data)), 
                                           "daily_p": json.dumps(daily_p),
@@ -221,7 +220,7 @@ def estimation(request):
     now_p4 = y_pd["ap3"][len(y_pd['ap3'])-1]
     now_p = [now_p1, now_p2, now_p3, now_p4]
     # print(watt_data)
-    return render(request, "estimation.html",{"energy": json.dumps(list(watt_data)), 
+    return render(request, "predict.html",{"energy": json.dumps(list(watt_data)), 
     									 "now_p": json.dumps(now_p),
     									 "d_col": json.dumps(column),
     									 "p1_val": json.dumps(p1_val),
@@ -296,12 +295,11 @@ def get_current_predict(request):
 def get_current_energy(request):
     global cur_wh, p1_wh, p2_wh, p3_wh, p4_wh, watt_data    
     print("cur"+str(cur_wh[0]))
-    bill_date = get_data_setting()
     today = unixtime_to_readable(time.time())
     month = today[0]+"-"+today[1].zfill(2)
     day = today[0]+"-"+today[1].zfill(2)+'-'+today[2].zfill(2)
-    bill_cost, bill_date =  get_cur_wh()
-    data_cur = (bill_cost+cur_wh[0])/1000
+    monthly_wh =  get_wh_monthly()
+    data_cur = (monthly_wh+cur_wh[0])/1000
     cost = calculate_cost_energy(data_cur)
     now_p1 = watt_data[-1]["P1"]
     now_p2 = watt_data[-1]["P2"]
@@ -381,13 +379,8 @@ def keep_data_realtime(d, wh, time_data, keep_day, keep_hour, keep_minute, check
                 cur_d30m = d[1]
                 cur_d1hr = d[2]
                 cur_wh = wh
-                bill_cycle = get_data_setting()
+                # bill_cycle = get_data_setting()
                 day_now = today[0]+"-"+today[1].zfill(2)+'-'+today[2].zfill(2)
-                if bill_cycle == today[2]:
-                    sum_wh, bill_date = get_cur_wh()
-                    cost = calculate_cost_energy(sum_wh/1000)                    
-                    json_data = {min(bill_date)+"_"+max(bill_date):cost}
-                    save_bill_cost(json_data, True)
                 time.sleep(1)
 
 def get_data_setting():
@@ -456,7 +449,7 @@ def backup_from_firebase():
 def check_condition(val, time_value, keep_day, keep_hour, keep_minute, check30, d, wh, time_data):
     d_1m, d_30m, d_1hr, d_1m_cur, d_30m_cur, d_1hr_cur = d
     p1_wh_value, p2_wh_value, p3_wh_value, p4_wh_value = wh
-    list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "pf1", "time"]
+    list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "time"]
     p1_value = val["P1"]
     p2_value = val["P2"]
     p3_value = val["P3"]
@@ -476,7 +469,6 @@ def check_condition(val, time_value, keep_day, keep_hour, keep_minute, check30, 
     s2_value = val["S2"]
     s3_value = val["S3"]
     s4_value = val["S4"]
-    pf1_value = val["PF1"]
     p1_wh_value += val["P1_wh"]*3
     p2_wh_value += val["P2_wh"]*3
     p3_wh_value += val["P3_wh"]*3
@@ -538,7 +530,7 @@ def check_condition(val, time_value, keep_day, keep_hour, keep_minute, check30, 
 
     time_data.append(time_value)
     list_values = [p1_value, p2_value, p3_value, p4_value, s1_value, s2_value, s3_value, s4_value,\
-                    q1_value, q2_value, q3_value, q4_value, i1_value, i2_value, i3_value, i4_value, pf1_value, time_value]
+                    q1_value, q2_value, q3_value, q4_value, i1_value, i2_value, i3_value, i4_value, time_value]
     d_1m_cur = d_1m_cur.append(pd.DataFrame([list_values], columns=list_column), ignore_index=True)
     d_30m_cur = d_30m_cur.append(pd.DataFrame([list_values], columns=list_column), ignore_index=True)
     d_1hr_cur = d_1hr_cur.append(pd.DataFrame([list_values], columns=list_column), ignore_index=True)
@@ -547,29 +539,24 @@ def check_condition(val, time_value, keep_day, keep_hour, keep_minute, check30, 
 
     return(keep_day, keep_hour, keep_minute, check30, d, wh, time_data)
 
-def get_cur_wh():
+def get_wh_monthly():
     module_dir = os.path.dirname(__file__) 
-    bill_cost_path = os.path.join(module_dir, '../../static/json/bill_cost.json')
+    setting_path = os.path.join(module_dir, '../../static/json/setting.json')
     file_path = os.path.join(module_dir, '../../static/json/data_energy/')
-    json_bill_data = open(bill_cost_path , 'r')  
-    data_json = json.load(json_bill_data)
-    last_file = max(data_json.items())[0]
-    last_day = last_file.split('_')[1]
-    start = False
+    json_setting = open(setting_path , 'r')  
+    data_json = json.load(json_setting)
+    bill_cycle = int(data_json['bill-cycle'])
     sum_wh = 0
-    bill_date = []
     list_of_files = sorted(glob.glob(file_path+'*'))
-    for files in list_of_files:
+    list_files_reversed = list_of_files[::-1]
+    for files in list_files_reversed:
         _, s = os.path.split(files)
         date_time = os.path.splitext(s)[0]
-        if(start):
+        if(str(bill_cycle) != date_time.split('-')[2]):
             with open(file_path+s) as f:
                 data = json.load(f)
             sum_wh += data['sum_p1']
-            bill_date.append(date_time)
-        if(last_day+'.json' == s):
-            start = True
-    return sum_wh, bill_date
+    return sum_wh
 
 def set_data():
     global p1_wh, p2_wh, p3_wh, p4_wh, watt_data, p2_pre_wh, p3_pre_wh, p4_pre_wh
@@ -603,7 +590,6 @@ def set_data():
     ref = db.reference('energy')
     result = ref.order_by_child('time').limit_to_last(1000).get() # 30 mins
     value_array = list(result.values())
-    # print(value_array)
     watt_data = deque(value_array)
 
 def calculate_cost_energy(energy):
@@ -639,24 +625,6 @@ def calculate_cost_energy(energy):
         last_cost = round(energy*dunit,2)
     return last_cost
 
-def save_bill_cost(json_data, update_json=False):
-    module_dir = os.path.dirname(__file__)  
-    json_path = os.path.join(module_dir, '../../static/json/')
-    file_name = json_path+"bill_cost.json"
-    
-    if(update_json):
-        bill_cost = open(file_name , 'r')  
-        data = json.load(bill_cost)
-        data.update(json_data)
-        with open(file_name, "w+") as f:
-            json.dump(data, f, ensure_ascii=False)
-    else:
-        keep_json = {}
-        for j in json_data:
-            keep_json.update(j)
-        with open(file_name, "w+") as f:
-            json.dump(keep_json, f, ensure_ascii=False)
-
 def get_data_last_7days():
     today = date.today()
     last_7days = []
@@ -665,7 +633,7 @@ def get_data_last_7days():
     last_7days.reverse()
     module_dir = os.path.dirname(__file__)  
     file_path = os.path.join(module_dir, '../../static/json/data_energy/')
-    list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "pf1", "time"]
+    list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "time"]
     keep_data = pd.DataFrame()
     exist_file, list_val = [], []
     check_today = False
@@ -741,7 +709,7 @@ def get_date_return_json(request):
         date_list = json.loads(all_date)
         module_dir = os.path.dirname(__file__)  
         file_path = os.path.join(module_dir, '../../static/json/data_energy/')
-        list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "pf1", "time"]
+        list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "time"]
         keep_data = pd.DataFrame()
         exist_file, list_val = [], []
         check_today = False
@@ -821,4 +789,4 @@ def get_date_return_json(request):
     return JsonResponse(data)
 
 th1 = threading.Thread(target = set_data).start()
-# th2 = threading.Thread(target = backup_from_firebase).start()
+th2 = threading.Thread(target = backup_from_firebase).start()
