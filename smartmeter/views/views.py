@@ -34,7 +34,7 @@ from sklearn.externals import joblib
 from skmultilearn.problem_transform import LabelPowerset
 
 urllib3.disable_warnings()
-time_data, p1, p2, p3, p4, q1, q2, q3, q4, s1, s2, s3, s4, i1, i2, i3, i4 = ([] for i in range(17))
+time_data, p1, p2, p3, p4, i1, i2, i3, i4 = ([] for i in range(9))
 p1_wh, p2_wh, p3_wh, p4_wh = ({'day':{},'month':{}, 'year':{}} for i in range(4))
 p2_pre_wh, p3_pre_wh, p4_pre_wh = ({'day':{}} for i in range(3))
 cur_d1m, cur_d1hr, cur_d30m = (pd.DataFrame() for i in range(3))
@@ -211,7 +211,7 @@ def estimation(request):
     today_s = today[0]+'-'+today[1].zfill(2)+'-'+today[2].zfill(2)
     if today_s not in column and len(cur_d1m) != 0:
         column.append(today_s)
-        X_test = pd.DataFrame({'time':cur_d1m['time'],'P':cur_d1m['p1'],'Q':cur_d1m['q1']})
+        X_test = pd.DataFrame({'time':cur_d1m['time'],'P':cur_d1m['p1'],'I':cur_d1m['i1']})
         predictions1 = load_model.predict(X_test)
         y_pd = convert_values(predictions1, lp).to_dict()
         p1_val.append(cur_wh[0]/1000)
@@ -229,14 +229,14 @@ def estimation(request):
 
     keep_app = []
     p_pre = []
-    q_pre = []
+    i_pre = []
     for i in range(len(watt_data)):
         t = watt_data[i]['time']
         p_pre.append(watt_data[i]['P1'])
-        q_pre.append(watt_data[i]['Q1'])
+        i_pre.append(watt_data[i]['I1'])
         dt = datetime.fromtimestamp(int(t))
         keep_app.append(int(dt.strftime('%H')))
-    X_test = pd.DataFrame({'time':keep_app,'P':p_pre,'Q':q_pre})
+    X_test = pd.DataFrame({'time':keep_app,'P':p_pre,'I':i_pre})
     predictions1 = load_model.predict(X_test)
     y_pd = convert_values(predictions1, lp).to_dict()
     now_p1 = watt_data[-1]['P1']
@@ -307,11 +307,11 @@ def unixtime_to_readable(unixtime):
 def get_current_predict(request):
     global load_model, lp, watt_data
     p_pre = [watt_data[-1]['P1']]
-    q_pre = [watt_data[-1]['Q1']]
+    i_pre = [watt_data[-1]['I1']]
     t = watt_data[-1]['time']
     dt = datetime.fromtimestamp(int(t))
     keep_app = [int(dt.strftime('%H'))]
-    X_test = pd.DataFrame({'time':keep_app,'P':p_pre,'Q':q_pre})
+    X_test = pd.DataFrame({'time':keep_app,'P':p_pre,'I':i_pre})
     predictions1 = load_model.predict(X_test)
     y_pd = convert_values(predictions1, lp)
     data = y_pd.to_dict()
@@ -474,26 +474,15 @@ def backup_from_firebase():
 def check_condition(val, time_value, keep_day, keep_hour, keep_minute, check30, d, wh, time_data):
     d_1m, d_30m, d_1hr, d_1m_cur, d_30m_cur, d_1hr_cur = d
     p1_wh_value, p2_wh_value, p3_wh_value, p4_wh_value = wh
-    list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "time"]
+    list_column = ["p1", "p2", "p3", "p4", "i1", "i2", "i3", "i4", "time"]
     p1_value = val["P1"]
     p2_value = val["P2"]
     p3_value = val["P3"]
     p4_value = val["P4"]
-    q1_value = val["Q1"]
-    q2_value = val["Q2"]
-    try:
-        q3_value = val["Q3"]
-    except:
-        q3_value = 0
-    q4_value = val["Q4"]
     i1_value = val["I1"]
     i2_value = val["I2"]
     i3_value = val["I3"]
     i4_value = val["I4"]
-    s1_value = val["S1"]
-    s2_value = val["S2"]
-    s3_value = val["S3"]
-    s4_value = val["S4"]
     p1_wh_value += val["P1_wh"]*3
     p2_wh_value += val["P2_wh"]*3
     p3_wh_value += val["P3_wh"]*3
@@ -554,8 +543,7 @@ def check_condition(val, time_value, keep_day, keep_hour, keep_minute, check30, 
         keep_day = unixtime_to_readable(time_value)[2]
 
     time_data.append(time_value)
-    list_values = [p1_value, p2_value, p3_value, p4_value, s1_value, s2_value, s3_value, s4_value,\
-                    q1_value, q2_value, q3_value, q4_value, i1_value, i2_value, i3_value, i4_value, time_value]
+    list_values = [p1_value, p2_value, p3_value, p4_value, i1_value, i2_value, i3_value, i4_value, time_value]
     d_1m_cur = d_1m_cur.append(pd.DataFrame([list_values], columns=list_column), ignore_index=True)
     d_30m_cur = d_30m_cur.append(pd.DataFrame([list_values], columns=list_column), ignore_index=True)
     d_1hr_cur = d_1hr_cur.append(pd.DataFrame([list_values], columns=list_column), ignore_index=True)
@@ -605,7 +593,7 @@ def set_data():
                 p4_wh['day'][new_day] = data['sum_p4']
 
                 # predict
-                X_test = pd.DataFrame({'time':data['1m']['time'],'P':data['1m']['p1'],'Q':data['1m']['q1']})
+                X_test = pd.DataFrame({'time':data['1m']['time'],'P':data['1m']['p1'],'I':data['1m']['i1']})
                 predictions1 = load_model.predict(X_test)
                 y_pd = convert_values(predictions1, lp).to_dict()
                 p2_pre_wh['day'][new_day] = sum(y_pd['ap1'].values())
@@ -658,7 +646,7 @@ def get_data_last_7days():
     last_7days.reverse()
     module_dir = os.path.dirname(__file__)  
     file_path = os.path.join(module_dir, '../../static/json/data_energy/')
-    list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "time"]
+    list_column = ["p1", "p2", "p3", "p4", "i1", "i2", "i3", "i4", "time"]
     keep_data = pd.DataFrame()
     exist_file, list_val = [], []
     check_today = False
@@ -704,22 +692,10 @@ def get_data_last_7days():
     for column in list_column:
         data[column] = list(keep_data[column])
 
-    X_test = pd.DataFrame({'time':data['time'][0],'P':data['p1'][0],'Q':data['q1'][0]})
+    X_test = pd.DataFrame({'time':data['time'][0],'P':data['p1'][0],'I':data['i1'][0]})
     predictions1 = load_model.predict(X_test)
     y_pd = convert_values(predictions1, lp).to_dict()
     return [data, y_pd]
-
-# def set_time(request):
-    # if request.method == "GET" and request.is_ajax():
-#         mins = int(request.GET.get('minutes'))
-        # appliance_id = int(request.GET.get('appliance_id'))
-        # status = int(request.GET.get('status'))
-#         print(mins, appliance_id, status)
-#         t2=threading.Timer(mins*60, control_plc, args=(appliance_id, status, )).start()
-#         t = datetime.now() + timedelta(minutes=mins)
-#         unixtime_delay = int(t.timestamp())
-#         data = {"time" : unixtime_delay}
-#         return JsonResponse(data)
 
 def control_plc(request):
     if request.method == "GET" and request.is_ajax():
@@ -737,7 +713,7 @@ def get_date_return_json(request):
         date_list = json.loads(all_date)
         module_dir = os.path.dirname(__file__)  
         file_path = os.path.join(module_dir, '../../static/json/data_energy/')
-        list_column = ["p1", "p2", "p3", "p4", "s1", "s2", "s3", "s4", "q1", "q2", "q3", "q4", "i1", "i2", "i3", "i4", "time"]
+        list_column = ["p1", "p2", "p3", "p4", "i1", "i2", "i3", "i4", "time"]
         keep_data = pd.DataFrame()
         exist_file, list_val = [], []
         check_today = False
@@ -779,7 +755,7 @@ def get_date_return_json(request):
         data = {}
         for column in list_column:
             data[column] = list(keep_data[column])  
-        X_test = pd.DataFrame({'time':data['time'][0],'P':data['p1'][0],'Q':data['q1'][0]})
+        X_test = pd.DataFrame({'time':data['time'][0],'P':data['p1'][0],'I':data['i1'][0]})
         predictions1 = load_model.predict(X_test)
         y_pd = convert_values(predictions1, lp).to_dict()
         data['pre_ap1'] = list(y_pd['ap1'].values())
