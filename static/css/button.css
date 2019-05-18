@@ -1,5 +1,5 @@
 .btn-toggle {
-  margin: 0 4rem;
+  /*margin: 0 4rem;*/
   padding: 0;
   position: relative;
   border: none;
@@ -29,11 +29,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle:before {
-  content: "off";
+  /*content: "off";*/
   left: -4rem;
 }
 .btn-toggle:after {
-  content: "on";
+  /*content: "on";*/
   right: -4rem;
   opacity: 0.5;
 }
@@ -93,7 +93,7 @@
   background-color: #29b5a8;
 }
 .btn-toggle.btn-lg {
-  margin: 0 5rem;
+  /*margin: 0 5rem;*/
   padding: 0;
   position: relative;
   border: none;
@@ -121,11 +121,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle.btn-lg:before {
-  content: "off";
+  /*content: "off";*/
   left: -5rem;
 }
 .btn-toggle.btn-lg:after {
-  content: "on";
+  /*content: "on";*/
   right: -5rem;
   opacity: 0.5;
 }
@@ -206,11 +206,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle.btn-sm:before {
-  content: "off";
+  /*content: "off";*/
   left: -0.5rem;
 }
 .btn-toggle.btn-sm:after {
-  content: "on";
+  /*content: "on";*/
   right: -0.5rem;
   opacity: 0.5;
 }
@@ -291,11 +291,11 @@
   transition: opacity 0.25s;
 }
 .btn-toggle.btn-xs:before {
-  content: "off";
+  /*content: "off";*/
   left: 0;
 }
 .btn-toggle.btn-xs:after {
-  content: "on";
+  /*content: "on";*/
   right: 0;
   opacity: 0.5;
 }

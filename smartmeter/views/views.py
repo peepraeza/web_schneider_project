@@ -86,11 +86,36 @@ def index(request):
     monthly_wh =  get_wh_monthly()
     data_cur = (monthly_wh+cur_wh[0])/1000
     cost = calculate_cost_energy(data_cur)
+
+    ref = db.reference('connect_plc')
+    valve1 = int(ref.get()['appliance1'])
+    valve2 = int(ref.get()['appliance2'])
+    valve3 = int(ref.get()['appliance3'])
+    if valve1 == 0:
+        state1 = "false"
+        _b1 = ""
+    else:
+        state1 = "true"
+        _b1 = "active"
+    if valve2 == 0:
+        state2 = "false"
+        _b2 = ""
+    else:
+        state2 = "true"
+        _b2 = "active"
+    if valve3 == 0:
+        state3 = "false"
+        _b3 = ""
+    else:
+        state3 = "true"
+        _b3 = "active"
     return render(request, "index.html", {"energy": json.dumps(list(watt_data)), 
                                           "daily_p": json.dumps(daily_p),
                                           "now_p": json.dumps(now_p),
                                           "meter": _m, "dbill": dbill, "unit":dunit,
-                                          'bill_cost': cost
+                                          'bill_cost': cost, 'state1': state1,
+                                          'button1': _b1, 'state2': state2, 'button2': _b2,
+                                          'state3': state3, 'button3': _b3
                                         })
 
 @login_required
@@ -684,23 +709,26 @@ def get_data_last_7days():
     y_pd = convert_values(predictions1, lp).to_dict()
     return [data, y_pd]
 
-def set_time(request):
+# def set_time(request):
+    # if request.method == "GET" and request.is_ajax():
+#         mins = int(request.GET.get('minutes'))
+        # appliance_id = int(request.GET.get('appliance_id'))
+        # status = int(request.GET.get('status'))
+#         print(mins, appliance_id, status)
+#         t2=threading.Timer(mins*60, control_plc, args=(appliance_id, status, )).start()
+#         t = datetime.now() + timedelta(minutes=mins)
+#         unixtime_delay = int(t.timestamp())
+#         data = {"time" : unixtime_delay}
+#         return JsonResponse(data)
+
+def control_plc(request):
     if request.method == "GET" and request.is_ajax():
-        mins = int(request.GET.get('minutes'))
         appliance_id = int(request.GET.get('appliance_id'))
         status = int(request.GET.get('status'))
-        print(mins, appliance_id, status)
-        t2=threading.Timer(mins*60, control_plc, args=(appliance_id, status, )).start()
-        t = datetime.now() + timedelta(minutes=mins)
-        unixtime_delay = int(t.timestamp())
-        data = {"time" : unixtime_delay}
-        return JsonResponse(data)
-
-def control_plc(appliance_id, status):
-    ref = db.reference('connect_plc')
-    appliance = "appliance"+str(appliance_id)
-    print(appliance)
-    ref.update({appliance : status})
+        ref = db.reference('connect_plc')
+        appliance = "appliance"+str(appliance_id)
+        print(appliance)
+        ref.update({appliance : status})
 
 def get_date_return_json(request):
     global backup
@@ -789,4 +817,4 @@ def get_date_return_json(request):
     return JsonResponse(data)
 
 th1 = threading.Thread(target = set_data).start()
-th2 = threading.Thread(target = backup_from_firebase).start()
+# th2 = threading.Thread(target = backup_from_firebase).start()

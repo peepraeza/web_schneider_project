@@ -74,8 +74,53 @@
                 <!-- Sales Cards  -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-12">
                         <div class="row">
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <div id="led1" class="led-green" style="margin-bottom:7px"></div>
+                                        <h5 class="text-white">{{ meter.1.description }}</h5>
+                                        <h2 id="ppm2" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                    <div class="box bg-white text-center">
+                                        <button id="sensor_control" type="button" class="btn btn-lg btn-toggle {{ button1 }}" data-toggle="button" aria-pressed="{{ state1 }}" autocomplete="off">
+                                            <div class="handle"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <div id="led2" class="led-green" style="margin-bottom:7px"></div>
+                                        <h5 class="text-white">{{ meter.2.description }}</h5>
+                                        <h2 id="ppm3" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                    <div class="box bg-white text-center">
+                                        <button id="sensor_control2" type="button" class="btn btn-lg btn-toggle {{ button2 }}" data-toggle="button" aria-pressed="{{ state2 }}" autocomplete="off">
+                                            <div class="handle"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <div id="led3" class="led-green" style="margin-bottom:7px"></div>
+                                        <h5 class="text-white">{{ meter.3.description }}</h5>
+                                        <h2 id="ppm4" class="font-light text-white">0</h2>
+                                        <h6 class="text-white">Watt</h6>
+                                    </div>
+                                    <div class="box bg-white text-center">
+                                        <button id="sensor_control3" type="button" class="btn btn-lg btn-toggle {{ button3 }}" data-toggle="button" aria-pressed="{{ state3 }}" autocomplete="off">
+                                            <div class="handle"></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-3">
                                 <div class="card card-hover">
                                     <div class="box bg-dark text-center">
@@ -83,44 +128,12 @@
                                         <h2 id="ppm1" class="font-light text-white">0</h2>
                                         <h6 class="text-white">Watt</h6>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card card-hover">
-                                    <div class="box bg-dark text-center">
-                                        <h5 class="text-white">{{ meter.1.description }}</h5>
-                                        <h2 id="ppm2" class="font-light text-white">0</h2>
-                                        <h6 class="text-white">Watt</h6>
+                                    <div class="box bg-warning text-center">
+                                        <h5>Charge Util Now</h5>
+                                        <h2 id="cost_main">0</h2>
+                                        <h6>Baht</h6>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card card-hover">
-                                    <div class="box bg-dark text-center">
-                                        <h5 class="text-white">{{ meter.2.description }}</h5>
-                                        <h2 id="ppm3" class="font-light text-white">0</h2>
-                                        <h6 class="text-white">Watt</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card card-hover">
-                                    <div class="box bg-dark text-center">
-                                        <h5 class="text-white">{{ meter.3.description }}</h5>
-                                        <h2 id="ppm4" class="font-light text-white">0</h2>
-                                        <h6 class="text-white">Watt</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-3">
-                        <div class="card card-hover">
-                            <div class="box bg-warning text-center">
-                                <h5>Charge Util Now</h5>
-                                <h2 id="cost_main">0</h2>
-                                <h6>Baht</h6>
                             </div>
                         </div>
                     </div>
@@ -249,40 +262,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                                    <div class="col-lg-6 col-xlg-3">
-                                        <div class="card card-hover">
-                                            <div class="box text-center">
-                                                <div class="led-box">
-                                                    <div id="led1" class="led-green"></div>
-                                                </div>
-                                                <h1 class="font-light text-white">
-                                                <button id="sensor_control" type="button" class="btn btn-lg btn-toggle {{ button1 }}" data-toggle="button" aria-pressed="{{ state1 }}" autocomplete="off">
-                                                    <div class="handle"></div>
-                                                </button>
-                                                </h1>
-                                                </br>
-                                                <h6 class="text-black">app1</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xlg-3">
-                                        <div class="card card-hover">
-                                            <div class="box text-center">
-                                                <div class="led-box">
-                                                    <div id="led2" class="led-green"></div>
-                                                </div>
-                                                <h1 class="font-light text-white">
-                                                <button id="sensor_control2" type="button" class="btn btn-lg btn-toggle {{ button2 }}" data-toggle="button" aria-pressed="{{ state2 }}" autocomplete="off">
-                                                    <div class="handle"></div>
-                                                </button>
-                                                </h1>
-                                                </br>
-                                                <h6 class="text-black">app2</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -334,6 +313,34 @@
     var ch3_name = "{{ meter.2.description }}";
     var ch4_name = "{{ meter.3.description }}";
     var unit = "{{ unit }}";
+
+    function switchPress(app,logic){
+        $.ajax({
+            url: '/ajax/control_plc/',
+            data: {appliance_id:app, status:logic},
+            dataType: 'json',
+            success: function (data) {
+                console.log("success control")
+            }
+        })
+    }
+    
+    if("{{ state1 }}" == "false"){
+        $("#led1").css("background-color", "#080");
+    }else{
+        $("#led1").css("background-color", "#0F0");
+    }
+    if("{{ state2 }}" == "false"){
+        $("#led2").css("background-color", "#080");
+    }else{
+        $("#led2").css("background-color", "#0F0");
+    }
+    if("{{ state3 }}" == "false"){
+        $("#led3").css("background-color", "#080");
+    }else{
+        $("#led3").css("background-color", "#0F0");
+    }
+
     $(document).ready(function() {
         var interval = setInterval(function() {
             var currentDate = new Date();
@@ -345,10 +352,32 @@
                 check = true;
             }
         }, 100);
+        $('#sensor_control').click(function() {
+            if($(this).attr("aria-pressed")=='true'){
+                switchPress(1, 0);
+            }else{
+                switchPress(1, 1);
+            }
+        });
+        $('#sensor_control2').click(function() {
+            if($(this).attr("aria-pressed")=='true'){
+                switchPress(2, 0);
+            }else{
+                switchPress(2, 1);
+            }
+        });
+        $('#sensor_control3').click(function() {
+            if($(this).attr("aria-pressed")=='true'){
+                switchPress(3, 0);
+            }else{
+                switchPress(3, 1);
+            }
+        });
         document.getElementById("tab2").classList.remove('active');
         document.getElementById("tab3").classList.remove('active');
         document.getElementById("tab4").classList.remove('active');
         document.getElementById("tab5").classList.remove('active');
+
     });
     </script>
     <script>
@@ -364,6 +393,46 @@
         
         firebase.initializeApp(config);
         var database = firebase.database(); 
+
+        var ref2 = database.ref("connect_plc");
+        ref2.on("child_changed", function(snapshot) {
+            var app_name = snapshot.key;
+            var status = snapshot.val();
+            // console.log(app_name+" : " +status);
+            if(app_name == "appliance1"){
+                if(status=="1"){
+                    $("#led1").css("background-color", "#0F0");
+                    $("#sensor_control").attr("aria-pressed", "true");
+                    document.getElementById("sensor_control").classList.add('active');
+                }else if(status=="0"){
+                    $("#led1").css("background-color", "#080");
+                    $("#sensor_control").attr("aria-pressed", "false");
+                    document.getElementById("sensor_control").classList.remove('active');
+                }
+            }else if(app_name == "appliance2"){
+                if(status=="1"){
+                    $("#led2").css("background-color", "#0F0");
+                    $("#sensor_control2").attr("aria-pressed", "true");
+                    document.getElementById("sensor_control2").classList.add('active');
+                }
+                else if(status=="0"){
+                    $("#led2").css("background-color", "#080");
+                    $("#sensor_control2").attr("aria-pressed", "false");
+                    document.getElementById("sensor_control2").classList.remove('active');
+                }
+            }else if(app_name == "appliance3"){
+                if(status=="1"){
+                    $("#led3").css("background-color", "#0F0");
+                    $("#sensor_control3").attr("aria-pressed", "true");
+                    document.getElementById("sensor_control3").classList.add('active');
+                }
+                else if(status=="0"){
+                    $("#led3").css("background-color", "#080");
+                    $("#sensor_control3").attr("aria-pressed", "false");
+                    document.getElementById("sensor_control3").classList.remove('active');
+                }
+            }
+        });
     </script>
     <script src="{% static 'js/highchart.js' %}"></script>
 </body>

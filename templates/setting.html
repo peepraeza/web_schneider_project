@@ -161,7 +161,6 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-            <button id='set_time'>dddd</button>
         </div>
     </div>    
     {% include "subtemp/user_modals.html" %}
@@ -254,17 +253,17 @@
             }
 });
         });
-$("#set_time").click(function() {
-    console.log("PEE")
-        $.ajax({
-        url: '/ajax/set_time/',
-        data: {minutes :1, appliance_id:2, status:1},
-        dataType: 'json',
-        success: function (data) {
-            console.log(convertTimestamp(data.time))
-        }
-    })
-});
+// $("#set_time").click(function() {
+//     console.log("PEE")
+//         $.ajax({
+//         url: '/ajax/set_time/',
+//         data: {minutes :1, appliance_id:2, status:1},
+//         dataType: 'json',
+//         success: function (data) {
+//             console.log(convertTimestamp(data.time))
+//         }
+//     })
+// });
            
 
 function convertTimestamp(timestamp) {
