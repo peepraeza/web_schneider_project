@@ -211,7 +211,7 @@ def estimation(request):
     today_s = today[0]+'-'+today[1].zfill(2)+'-'+today[2].zfill(2)
     if today_s not in column and len(cur_d1m) != 0:
         column.append(today_s)
-        X_test = pd.DataFrame({'time':cur_d1m['time'],'P':cur_d1m['p1'],'I':cur_d1m['i1']})
+        X_test = pd.DataFrame({'P':cur_d1m['p1'],'I':cur_d1m['i1']})
         predictions1 = load_model.predict(X_test)
         y_pd = convert_values(predictions1, lp).to_dict()
         p1_val.append(cur_wh[0]/1000)
@@ -236,7 +236,7 @@ def estimation(request):
         i_pre.append(watt_data[i]['I1'])
         dt = datetime.fromtimestamp(int(t))
         keep_app.append(int(dt.strftime('%H')))
-    X_test = pd.DataFrame({'time':keep_app,'P':p_pre,'I':i_pre})
+    X_test = pd.DataFrame({'P':p_pre,'I':i_pre})
     predictions1 = load_model.predict(X_test)
     y_pd = convert_values(predictions1, lp).to_dict()
     now_p1 = watt_data[-1]['P1']
@@ -262,23 +262,21 @@ def estimation(request):
 def convert_values(predictions1, lp_in):
     inverse_fn = lambda lbl: lp_in.inverse_transform(lbl)
     y_pred = inverse_fn(predictions1.flatten().astype(int)).toarray()
-    ap1_pd = pd.DataFrame({i:y_pred[:,i] for i in range(4)})
-    ap2_pd = pd.DataFrame({i:y_pred[:,i+4] for i in range(4)})
-    ap3_pd = pd.DataFrame({i:y_pred[:,i+8] for i in range(4)})
+    # ap1_pd = pd.DataFrame({i:y_pred[:,i] for i in range(4)})
+    # ap2_pd = pd.DataFrame({i:y_pred[:,i+4] for i in range(4)})
+    # ap3_pd = pd.DataFrame({i:y_pred[:,i+8] for i in range(4)})
+    # y_pred_ev = pd.DataFrame({})
+    # y_pred_ev['ap1'] = list(pd.Series(ap1_pd.columns[np.where(ap1_pd==1)[1]]))
+    # y_pred_ev['ap2'] = list(pd.Series(ap2_pd.columns[np.where(ap2_pd==1)[1]]))
+    # y_pred_ev['ap3'] = list(pd.Series(ap3_pd.columns[np.where(ap3_pd==1)[1]]))
     y_pred_ev = pd.DataFrame({})
-    y_pred_ev['ap1'] = list(pd.Series(ap1_pd.columns[np.where(ap1_pd==1)[1]]))
-    y_pred_ev['ap2'] = list(pd.Series(ap2_pd.columns[np.where(ap2_pd==1)[1]]))
-    y_pred_ev['ap3'] = list(pd.Series(ap3_pd.columns[np.where(ap3_pd==1)[1]]))
-    k_mean = list([[2.15210285e+00, 8.52438422e+00, 3.83718099e-02],
-        [9.24644536e+01, 1.00098512e+02, 5.70881799e-01],
-        [1.25115337e+02, 1.31406327e+02, 7.60770557e-01],
-        [6.09337188e+01, 6.66166802e+01, 3.79289921e-01]]), list([[1.14160129e+02, 1.16585378e+02, 6.91351893e-01],
-        [8.47389373e+02, 2.90199956e+02, 3.84198640e+00],
-        [3.44046524e+02, 1.19216976e+02, 1.54038705e+00],
-        [1.24179946e+03, 1.74602829e+02, 5.32716895e+00]]), list([[3.54255695e+00, 5.38882404e+01, 2.29437080e-01],
-        [1.82461380e+03, 1.44850806e+01, 7.62384242e+00],
-        [5.49765080e+02, 4.28571073e+02, 3.11881945e+00],
-        [2.82815214e+03, 5.19177953e-02, 1.17964208e+01]])
+    y_pred_ev['ap1'] = y_pred[:,0]
+    y_pred_ev['ap2'] = y_pred[:,1]
+    y_pred_ev['ap3'] = y_pred[:,2]
+    k_mean = list([[0.00000000e+00, 9.77995110e-05],
+        [2.70498753e+01, 2.11346633e-01]]), list([[0.00000000e+00, 4.40097800e-04],
+        [2.91865337e+02, 1.38209476e+00]]), list([[0.00000000e+00, 1.22249389e-04],
+        [1.00748130e+02, 4.45561097e-01]])
     k_mean = np.array(k_mean)
     p_val = np.array([k_mean[i][:,0] for i in range(3)])
     y_pd = c2v(y_pred_ev, p_val)
@@ -287,9 +285,10 @@ def convert_values(predictions1, lp_in):
 def c2v(X, lbl):
     columns = X.columns
     val = np.copy(X).astype(float)
+    cpn = 2
     for i, l in enumerate(lbl):
         _k = val[:, i]
-        for j in range(4):
+        for j in range(cpn):
             val[_k==j, i] = l[j]
     return pd.DataFrame(val, columns=columns)
 
@@ -311,7 +310,7 @@ def get_current_predict(request):
     t = watt_data[-1]['time']
     dt = datetime.fromtimestamp(int(t))
     keep_app = [int(dt.strftime('%H'))]
-    X_test = pd.DataFrame({'time':keep_app,'P':p_pre,'I':i_pre})
+    X_test = pd.DataFrame({'P':p_pre,'I':i_pre})
     predictions1 = load_model.predict(X_test)
     y_pd = convert_values(predictions1, lp)
     data = y_pd.to_dict()
@@ -593,7 +592,7 @@ def set_data():
                 p4_wh['day'][new_day] = data['sum_p4']
 
                 # predict
-                X_test = pd.DataFrame({'time':data['1m']['time'],'P':data['1m']['p1'],'I':data['1m']['i1']})
+                X_test = pd.DataFrame({'P':data['1m']['p1'],'I':data['1m']['i1']})
                 predictions1 = load_model.predict(X_test)
                 y_pd = convert_values(predictions1, lp).to_dict()
                 p2_pre_wh['day'][new_day] = sum(y_pd['ap1'].values())
@@ -692,7 +691,7 @@ def get_data_last_7days():
     for column in list_column:
         data[column] = list(keep_data[column])
 
-    X_test = pd.DataFrame({'time':data['time'][0],'P':data['p1'][0],'I':data['i1'][0]})
+    X_test = pd.DataFrame({'P':data['p1'][0],'I':data['i1'][0]})
     predictions1 = load_model.predict(X_test)
     y_pd = convert_values(predictions1, lp).to_dict()
     return [data, y_pd]
@@ -755,7 +754,7 @@ def get_date_return_json(request):
         data = {}
         for column in list_column:
             data[column] = list(keep_data[column])  
-        X_test = pd.DataFrame({'time':data['time'][0],'P':data['p1'][0],'I':data['i1'][0]})
+        X_test = pd.DataFrame({'P':data['p1'][0],'I':data['i1'][0]})
         predictions1 = load_model.predict(X_test)
         y_pd = convert_values(predictions1, lp).to_dict()
         data['pre_ap1'] = list(y_pd['ap1'].values())
@@ -793,4 +792,4 @@ def get_date_return_json(request):
     return JsonResponse(data)
 
 th1 = threading.Thread(target = set_data).start()
-# th2 = threading.Thread(target = backup_from_firebase).start()
+th2 = threading.Thread(target = backup_from_firebase).start()
