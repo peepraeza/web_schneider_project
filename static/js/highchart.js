@@ -302,7 +302,7 @@ Highcharts.stockChart('activePow2', {
         events: {
             load: function () {
                 // set up the updating of the chart each second
-                var series2 = this.series[1];
+                var series2 = this.series[0];
                 var ref = database.ref("energy");
                 ref.orderByChild("time").limitToLast(1).on("child_added", function(snapshot) {
                     var changedData = snapshot.val();                        
@@ -370,7 +370,7 @@ Highcharts.stockChart('activePow3', {
         events: {
             load: function () {
                 // set up the updating of the chart each second
-                var series3 = this.series[2];
+                var series3 = this.series[0];
                 var ref = database.ref("energy");
                 ref.orderByChild("time").limitToLast(1).on("child_added", function(snapshot) {
                     var changedData = snapshot.val();                        
@@ -439,7 +439,7 @@ Highcharts.stockChart('activePow4', {
         events: {
             load: function () {
                 // set up the updating of the chart each second
-                var series4 = this.series[3];
+                var series4 = this.series[0];
                 var ref = database.ref("energy");
                 ref.orderByChild("time").limitToLast(1).on("child_added", function(snapshot) {
                     var changedData = snapshot.val();                        
@@ -576,7 +576,7 @@ Highcharts.stockChart('current2', {
         events: {
             load: function () {
                 // set up the updating of the chart each second
-                var series2 = this.series[1];
+                var series2 = this.series[0];
                 var ref = database.ref("energy");
                 ref.orderByChild("time").limitToLast(1).on("child_added", function(snapshot) {
                     var changedData = snapshot.val();                        
@@ -644,7 +644,7 @@ Highcharts.stockChart('current3', {
         events: {
             load: function () {
                 // set up the updating of the chart each second
-                var series3 = this.series[2];
+                var series3 = this.series[0];
                 var ref = database.ref("energy");
                 ref.orderByChild("time").limitToLast(1).on("child_added", function(snapshot) {
                     var changedData = snapshot.val();                        
@@ -712,7 +712,7 @@ Highcharts.stockChart('current4', {
         events: {
             load: function () {
                 // set up the updating of the chart each second
-                var series4 = this.series[3];
+                var series4 = this.series[0];
                 var ref = database.ref("energy");
                 ref.orderByChild("time").limitToLast(1).on("child_added", function(snapshot) {
                     var changedData = snapshot.val();                        
