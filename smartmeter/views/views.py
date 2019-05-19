@@ -793,4 +793,4 @@ def get_date_return_json(request):
     return JsonResponse(data)
 
 th1 = threading.Thread(target = set_data).start()
-# th2 = threading.Thread(target = backup_from_firebase).start()
+th2 = threading.Thread(target = backup_from_firebase).start()

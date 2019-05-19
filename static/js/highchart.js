@@ -95,8 +95,6 @@ chart: {
                         var val_pp3 = data.now_p[2]
                         var val_pp4 = data.now_p[3]
                         var bill_cost = data.bill_cost;
-                        console.log(bill_cost);
-                        console.log(val_p1);
                         
                         // alert(val_pp1);
                         $('#pv1').text(val_p1.toFixed(2));
