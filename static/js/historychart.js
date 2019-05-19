@@ -421,14 +421,14 @@ $("#button").click(function() {
                 $("#cost_by_date").text("฿"+data.cost_by_date);
                 for(var i=0;i< data.time[0].length ;i++){
                     var time = parseInt(data.time[0][i])*1000; 
-                    p1.push([time, parseInt(data.p1[0][i])]);
-                    p2.push([time, parseInt(data.p2[0][i])]);
-                    p3.push([time, parseInt(data.p3[0][i])]);
-                    p4.push([time, parseInt(data.p4[0][i])]);
-                    i1.push([time, parseInt(data.i1[0][i])]);
-                    i2.push([time, parseInt(data.i2[0][i])]);
-                    i3.push([time, parseInt(data.i3[0][i])]);
-                    i4.push([time, parseInt(data.i4[0][i])]);
+                    p1.push([time, (data.p1[0][i])]);
+                    p2.push([time, (data.p2[0][i])]);
+                    p3.push([time, (data.p3[0][i])]);
+                    p4.push([time, (data.p4[0][i])]);
+                    i1.push([time, (data.i1[0][i])]);
+                    i2.push([time, (data.i2[0][i])]);
+                    i3.push([time, (data.i3[0][i])]);
+                    i4.push([time, (data.i4[0][i])]);
                 }
                 if(get_all_date.length <= 7){
                     var max_series = get_all_date.length-1;
