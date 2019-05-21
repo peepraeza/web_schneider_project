@@ -338,7 +338,7 @@ def get_current_energy(request):
     return JsonResponse(data)
 
 def save_json(keep_day, d_1m, d_30m, d_1hr, p1_wh_val, p2_wh_val, p3_wh_val, p4_wh_val, list_column):
-    global p1_wh, p2_wh, p3_wh, p4_wh 
+    global p1_wh, p2_wh, p3_wh, p4_wh, p2_pre_wh, p3_pre_wh, p4_pre_wh 
     print("open save json")
     module_dir = os.path.dirname(__file__)  
     file_path = os.path.join(module_dir, '../../static/json/data_energy/')
@@ -363,6 +363,13 @@ def save_json(keep_day, d_1m, d_30m, d_1hr, p1_wh_val, p2_wh_val, p3_wh_val, p4_
     d = year+"-"+month.zfill(2)+"-"+day.zfill(2)
     val = [keep_json['sum_p1'],keep_json['sum_p2'],keep_json['sum_p3'],keep_json['sum_p4']]
     p1_wh['day'][d], p2_wh['day'][d], p3_wh['day'][d], p4_wh['day'][d] = val
+
+    X_test = pd.DataFrame({'P':d_1m['p1'],'I':d_1m['i1']})
+    predictions1 = load_model.predict(X_test)
+    y_pd = convert_values(predictions1, lp).to_dict()
+    p2_pre_wh['day'][d] = sum(y_pd['ap1'].values())
+    p3_pre_wh['day'][d] = sum(y_pd['ap2'].values())
+    p4_pre_wh['day'][d] = sum(y_pd['ap3'].values())
 
 def keep_data_realtime(d, wh, time_data, keep_day, keep_hour, keep_minute, check30):
     global cur_d1m, cur_d1hr, cur_d30m, cur_wh, watt_data
